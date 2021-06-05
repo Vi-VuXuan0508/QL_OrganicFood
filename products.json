@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "60753d609f19a20b7f0ae31a"
+  },
+  "image": "anh0.png",
+  "id_category": {
+    "$oid": "60753fc79f19a20b7f0ae31c"
+  },
+  "published": {
+    "$date": "2020-09-08T00:00:00Z"
+  },
+  "price": 100,
+  "name": "Simply Organic"
+},{
+  "_id": {
+    "$oid": "60753e1ac937df3318fe5ae3"
+  },
+  "image": "anh2.jpg",
+  "id_category": {
+    "$oid": "6075400cc937df3318fe5ae8"
+  },
+  "published": {
+    "$date": "2020-09-08T00:00:00Z"
+  },
+  "price": 200,
+  "name": "Organic Yellow Cornmeal"
+},{
+  "_id": {
+    "$oid": "60753e31c937df3318fe5ae4"
+  },
+  "image": "anh4.png",
+  "id_category": {
+    "$oid": "60753ffec937df3318fe5ae7"
+  },
+  "published": {
+    "$date": "2020-09-08T00:00:00Z"
+  },
+  "price": 300,
+  "name": "Miracle Noodle"
+},{
+  "_id": {
+    "$oid": "60753e4bc937df3318fe5ae5"
+  },
+  "image": "anh2.png",
+  "id_category": {
+    "$oid": "60753fc79f19a20b7f0ae31c"
+  },
+  "published": {
+    "$date": "2020-09-08T00:00:00Z"
+  },
+  "price": 400,
+  "name": "Wonder Foods Organic"
+},{
+  "_id": {
+    "$oid": "60753e66c937df3318fe5ae6"
+  },
+  "image": "anh1.png",
+  "id_category": {
+    "$oid": "60753fc79f19a20b7f0ae31c"
+  },
+  "published": {
+    "$date": "2020-09-08T00:00:00Z"
+  },
+  "price": 500,
+  "name": "Soyabean"
+},{
+  "_id": {
+    "$oid": "60782670581a554b0835d186"
+  },
+  "image": "anh3.png",
+  "name": "Coconut ",
+  "price": 300,
+  "published": {
+    "$date": "2021-04-15T00:00:00Z"
+  },
+  "id_category": {
+    "$oid": "60753fc79f19a20b7f0ae31c"
+  },
+  "__v": 0
+}]

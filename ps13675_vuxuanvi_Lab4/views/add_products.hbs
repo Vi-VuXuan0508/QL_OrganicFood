@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>ADD PRODUCT LIST</h3>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-primary" onclick="goToBack()">Go back</button>
+    </div>
+  </div>
+
+  <form action="/products/add_products" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" class="form-control" id="image" name="image">
+    </div>
+    <div><img class="d-none" id="showImg" width="100" height="100" src="" alt=""></div>
+    <div class="form-group">
+      <label for="name">Product Name:</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name"
+        onchange="validateProductName()" onkeyup="validateProductName()">
+      <p id="nameError" class="alert alert-warning d-none"></p>
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" placeholder="Enter price" name="price"
+        onchange="validateProductPrice()" onkeyup="validateProductPrice()">
+      <p id="priceError" class="alert alert-warning d-none"></p>
+    </div>
+    <div class="form-group">
+      <label for="Published">Published:</label>
+      <input type="date" class="form-control" id="published" name="published" onchange="validateProductPublished()"
+        onkeyup="validateProductPublished()">
+      <p id="publishedError" class="alert alert-warning d-none"></p>
+    </div>
+    <div class="form-group">
+      <label for="id_category">Category product list:</label>
+      <select class="form-control" id="id_category" name="id_category">
+        {{#each categoryList}}
+        <option value="{{this._id}}">{{this.categoryName}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <button disabled id="btn" type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+<script>
+  function goToBack() {
+    window.location.href = '/products'
+  }
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader()
+      reader.onload = function (e) {
+        $('#showImg').attr('src', e.target.result)
+        $('#showImg').removeClass('d-none')
+      }
+      reader.readAsDataURL(input.files[0])
+    }
+  }
+  $("#image").change(function () {
+    readURL(this)
+  })
+
+  var isProductNameValid = false, isProductPriceValid = false, isProductPublishedValid = false
+  function validateProductName() {
+    let name = document.getElementById('name').value
+    if (!name || name.trim().length == 0 || name.trim().length > 20) {
+      document.getElementById('nameError').innerText = 'Error'
+      document.getElementById('nameError').classList.remove('d-none')
+      isProductNameValid = false
+    }
+    else {
+      document.getElementById('nameError').innerText = ''
+      document.getElementById('nameError').classList.add('d-none')
+      isProductNameValid = true
+    }
+    validateForm()
+  }
+
+  function validateProductPrice() {
+    let price = document.getElementById('price').value
+    if (!price || price.trim().length == 0 || price.trim().length > 10) {
+      document.getElementById('priceError').innerText = 'Error'
+      document.getElementById('priceError').classList.remove('d-none')
+      isProductPriceValid = false
+    }
+    else {
+      document.getElementById('priceError').innerText = ''
+      document.getElementById('priceError').classList.add('d-none')
+      isProductPriceValid = true
+    }
+    validateForm()
+  }
+
+  function validateProductPublished() {
+    let published = document.getElementById('published').value
+    let varDate = new Date(published)
+    let today = new Date()
+    today.setHours(0, 0, 0, 0)
+    if (!published || varDate <= today) {
+      document.getElementById('publishedError').innerText = 'Error'
+      document.getElementById('publishedError').classList.remove('d-none')
+      isProductPublishedValid = false
+    }
+    else {
+      document.getElementById('publishedError').innerText = ''
+      document.getElementById('publishedError').classList.add('d-none')
+      isProductPublishedValid = true
+    }
+    validateForm()
+  }
+
+  function validateForm() {
+    if (isProductNameValid == false || isProductPriceValid == false || isProductPublishedValid == false) {
+      document.getElementById('btn').disabled = true
+    }
+    else {
+      document.getElementById('btn').disabled = false
+    }
+  }
+</script>

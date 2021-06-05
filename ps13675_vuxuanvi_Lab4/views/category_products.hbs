@@ -1,0 +1,97 @@
+<!-- LOGO HEADER END-->
+<section class="menu-section">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="navbar-collapse collapse ">
+            <ul id="menu-top" class="nav navbar-nav navbar-right">
+              <li><a href="/" class="menu-top-active">PRODUCTS</a></li>
+              <li><a href="/products/category_products">CATEGORIES</a></li>
+              <li><a href="tab.html">TABS & PANELS</a></li>
+              <li><a href="table.html">TABLES</a></li>
+              <li><a href="blank.html">BLANK PAGE</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- MENU SECTION END-->
+
+<div class="content-wrapper">
+  <div class="container">
+    <div class="row pad-botm">
+      <div class="col-md-12">
+        <h3 class="header-line">CATEGORIES LIST</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+
+      </div>
+      <div class="col-sm-6 text-right">
+        <button type="button" class="btn btn-primary" onclick="goToAddCategory()">Add Category</button>
+      </div>
+    </div>&ensp;
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>CATEGORY NAME</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each categoryList}}
+        <tr>
+          <td>{{this._id}}</td>
+          <td>{{this.categoryName}}</td>
+          <td class="text-right">
+            <button type="button" class="btn btn-warning" onclick="goToEditCategory('{{this._id}}')">Edit</button>
+            <button type="button" class="btn btn-danger" onclick="handleDeleteCategory('{{this._id}}')">Delete</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONTENT-WRAPPER SECTION END-->
+<section class="footer-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        &copy; 2014 Yourdomain.com |<a href="http://www.binarytheme.com/" target="_blank"> Designed by :
+          binarytheme.com</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- FOOTER SECTION END-->
+
+<script>
+  function goToAddCategory() {
+    window.location.href = '/products/add_category'
+  }
+
+  function goToEditCategory(id) {
+    window.location.href = '/products/edit_category/' + id
+  }
+
+  function handleDeleteCategory(id) {
+    $.ajax({
+      type: "DELETE",
+      url: '/products/delete_category/' + id,
+      success: function (data) {
+        if (data.res == true) {
+          window.location.href = '/products/category_products'
+        }
+      }
+    });
+  }
+</script>

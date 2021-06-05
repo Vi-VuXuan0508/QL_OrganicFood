@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>EDIT CATEGORY LIST</h3>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-primary" onclick="goToBack()">Go back</button>
+    </div>
+  </div>
+
+  <form action="/products/edit_category/{{category._id}}" method="POST">
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <input type="text" class="form-control" id="categoryName" placeholder="Enter Category Name" name="categoryName"
+        value="{{category.categoryName}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+<script>
+  function goToBack() {
+    window.location.href = '/products/category_products'
+  }
+</script>

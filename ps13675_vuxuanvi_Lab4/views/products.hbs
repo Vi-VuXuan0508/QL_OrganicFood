@@ -1,0 +1,148 @@
+<!-- LOGO HEADER END-->
+<section class="menu-section">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="navbar-collapse collapse ">
+            <ul id="menu-top" class="nav navbar-nav navbar-right">
+              <li><a href="/" class="menu-top-active">PRODUCTS</a></li>
+              <li><a href="/products/category_products">CATEGORIES</a></li>
+              <li><a href="tab.html">TABS & PANELS</a></li>
+              <li><a href="table.html">TABLES</a></li>
+              <li><a href="blank.html">BLANK PAGE</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+  <div class="container">
+    <div class="row pad-botm">
+      <div class="col-md-12">
+        <h3 class="header-line">PRODUCT LIST</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+
+      </div>
+      <div class="col-sm-6 text-right">
+        <!-- <button type="button" class="btn btn-dark" onclick="goToCategory()">CATEGORY</button> -->
+        <button type="button" class="btn btn-primary" onclick="goToAddProducts()">Add Products</button>
+      </div>
+    </div>&ensp;
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="nameSearch" placeholder="Search..." name="nameSearch"
+        onkeyup="search()">
+    </div>
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>IMAGE</th>
+          <th>PRODUCT NAME</th>
+          <th>PRICE</th>
+          <th>PUBLISHED</th>
+          <th>CATEGORY</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody id="table_products">
+        {{#each productsList}}
+        <tr>
+          <td>{{this._id}}</td>
+          <td><img width="70" height="70" src="http://localhost:3000/images/{{this.image}}" alt="image"></td>
+          <td>{{this.name}}</td>
+          <td>{{this.price}}</td>
+          <td>{{formatDate this.published}}</td>
+          <td>{{this.id_category.categoryName}}</td>
+          <td class="text-right">
+            <button type="button" class="btn btn-warning" onclick="goToEditProducts('{{this._id}}')">Edit</button>
+            <button type="button" class="btn btn-danger" onclick="handleDeleteProducts('{{this._id}}')">Delete</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONTENT-WRAPPER SECTION END-->
+<section class="footer-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        &copy; 2014 Yourdomain.com |<a href="http://www.binarytheme.com/" target="_blank"> Designed by :
+          binarytheme.com</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- FOOTER SECTION END-->
+
+<script>
+  function goToAddProducts() {
+    window.location.href = '/products/add_products'
+  }
+
+  // function goToCategory(){
+  //   window.location.href = '/products/category_products'
+  // }
+
+  function goToEditProducts(id) {
+    window.location.href = '/products/edit_products/' + id
+  }
+
+  function handleDeleteProducts(id) {
+    $.ajax({
+      type: "DELETE",
+      url: '/products/delete_products/' + id,
+      success: function (data) {
+        if (data.res == true) {
+          window.location.href = '/products'
+        }
+      }
+    });
+  }
+
+  function search() {
+    let value = document.getElementById('nameSearch').value
+    if (value) {
+      $.ajax({
+        type: "GET",
+        url: '/products/search/' + value,
+        success: processing
+      });
+    }
+  }
+
+  function processing(data) {
+    let { result, categoryList } = data
+    let body = document.getElementById('table_products')
+    let string = ''
+    body.innerHTML = ''
+    result.forEach(item => {
+      string += '<tr>'
+      string += '<td>' + item.id + '</td>'
+      string += '<td>' + item.name + '</td>'
+      string += '<td>' + item.price + '</td>'
+      string += '<td>' + item.published + '</td>'
+      string += '<td>' + categoryList.find(category => category.id == item.id_category).categoryName + '</td>'
+      string += '<td class="text-right">'
+      string += '<button type="button" class="btn btn-warning" onclick="goToEditProducts(' + item.id + ')">Edit</button>'
+      string += '<button type="button" class="btn btn-danger" onclick="handleDeleteProducts(' + item.id + ')">Delete</button>'
+      string += '</td>'
+      string += '</tr>'
+      body.innerHTML += string
+      string = ''
+    })
+  }
+</script>

@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "60753fc79f19a20b7f0ae31c"
+  },
+  "categoryName": "Vitamin & thực phẩm"
+},{
+  "_id": {
+    "$oid": "60753ffec937df3318fe5ae7"
+  },
+  "categoryName": "Thực phẩm bổ sung"
+},{
+  "_id": {
+    "$oid": "6075400cc937df3318fe5ae8"
+  },
+  "categoryName": "Thực phẩm chức năng"
+},{
+  "_id": {
+    "$oid": "6075402bc937df3318fe5ae9"
+  },
+  "categoryName": "Axit amin"
+},{
+  "_id": {
+    "$oid": "60754036c937df3318fe5aea"
+  },
+  "categoryName": "Tinh dầu"
+}]
